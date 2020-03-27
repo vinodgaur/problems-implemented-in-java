@@ -20,6 +20,8 @@ class BST {
         b.inorder(b.root);
         System.out.println("");
         b.bfs();
+
+        b.dfs(b.root);
     }
 
     Node add(int n, Node root) {
@@ -52,6 +54,14 @@ class BST {
             //push it's child to queue
             if(n.left!=null) q.add(n.left);
             if(n.right!=null) q.add(n.right);
+        }
+    }
+
+    void dfs(Node root) {
+        if (root != null) {
+            dfs(root.left);
+            dfs(root.right);
+            System.out.print(root.data);
         }
     }
 }
