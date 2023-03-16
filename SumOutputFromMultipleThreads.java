@@ -1,3 +1,6 @@
+//Note: main thread get block but it doesn't block executing join statement if thread has started. 
+//Like t2.join() got execute but not sys out in main thread after t1.join.
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class SumOutputFromMultipleThreads {
