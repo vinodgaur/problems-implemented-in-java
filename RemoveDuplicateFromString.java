@@ -1,45 +1,59 @@
+import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
 
-public class RemoveDuplicateFromString {
-
-    AtomicInteger sum = new AtomicInteger();
-
-    public RemoveDuplicateFromString() {
+public class RemoveDuplicateFromString{
+    public static void main(String[] args) {
+        String str = removeDuplicateFromStringOpt("geeksforgeeks");
+        System.out.println(str);
     }
 
-    public static void main(String[] args)
-    {
-        try {
-        RemoveDuplicateFromString t = new RemoveDuplicateFromString();
-            t.process();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-    public void process(){
-        String s = "vinodgaurvinod";
-        Set<Character> set = new HashSet();
-        boolean[] arr = new boolean[255];
-        for(char c: s.toCharArray()){
-            int i = (int)c;
-            arr[i] = true;
+    public static String removeDuplicateFromString(String str2){
+        char[] str = str2.toCharArray();
+        if(str.length <=1)
+            return String.valueOf(str);
 
-            //set code
-            set.add(c);
-        }
-        for(int i=0; i<arr.length;i++){
-            if(arr[i])
-                System.out.print((char)i);
-        }
-        System.out.println();
-        for(char c: set){
-            System.out.print(c);
+        
+        int index = 1;
+        for(int i=1;i<str.length;i++){
+            int j=-1;
+            boolean f = false;
+            while (++j<=index) {
+                if(str[j]==str[i]){
+                    f = true;
+                    break;
+                }
+            }
+            if(!f)
+                str[index++] = str[i];
         }
 
+        char[] str1 = Arrays.copyOf(str, index);
+        return String.valueOf(str1);
     }
 
+    public static String removeDuplicateFromStringOpt(String str2){
+        char[] str = str2.toCharArray();
+        if(str.length <=1)
+            return String.valueOf(str);
+
+        
+        int index = 1;
+        Set<Character> set = new HashSet<>();
+        set.add(str[0]);
+
+        for(int i=1;i<str.length;i++){
+            boolean f = false;
+            if(set.contains(str[i])){
+                f = true;
+            }
+            if(!f){
+                str[index++] = str[i];
+                set.add(str[i]);
+            }
+        }
+
+        char[] str1 = Arrays.copyOf(str, index);
+        return String.valueOf(str1);
+    }
 }
-
